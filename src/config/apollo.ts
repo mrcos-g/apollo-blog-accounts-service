@@ -1,6 +1,5 @@
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server';
 import { buildSchema, Resolver, Query } from 'type-graphql';
-import app from './app';
 
 @Resolver()
 class HelloResolver {
@@ -19,10 +18,8 @@ const startServer = async (): Promise<void> => {
 
   const port = (process.env.PORT || 4000) as number;
 
-  server.applyMiddleware({ app });
-
-  app.listen({ port }, () => {
-    console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
+  server.listen(port).then(({ url }) => {
+    console.log(`Accounts service running at ${url}`);
   });
 };
 

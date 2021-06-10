@@ -1,20 +1,8 @@
 import { ApolloServer } from 'apollo-server';
-import { buildSchema, Resolver, Query } from 'type-graphql';
-
-@Resolver()
-class HelloResolver {
-  @Query(() => String)
-  public async hello() {
-    return 'hello world';
-  }
-}
+import { buildAccountsSchema } from '../schema';
 
 const startServer = async (): Promise<void> => {
-  const schema = await buildSchema({
-    resolvers: [HelloResolver],
-  });
-
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ schema: await buildAccountsSchema() });
 
   const port = (process.env.PORT || 4000) as number;
 

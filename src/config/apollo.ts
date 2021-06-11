@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import { buildAccountsSchema } from '../schema';
 
 const startServer = async (): Promise<void> => {
-  const server = new ApolloServer({ schema: await buildAccountsSchema() });
+  const server = new ApolloServer({ schema: await buildAccountsSchema(), tracing: false });
 
   const port = (process.env.PORT || 4000) as number;
 

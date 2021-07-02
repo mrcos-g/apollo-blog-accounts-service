@@ -1,5 +1,9 @@
 import { Account } from '../../types/account';
-import { Resolver, Query } from 'type-graphql';
+import { Resolver, Query, Ctx } from 'type-graphql';
+
+export interface IContext {
+  user: string;
+}
 
 function createAccount(accountData: Account) {
   return Object.assign(new Account(), accountData);
@@ -15,7 +19,8 @@ const accounts: Account[] = [
 @Resolver()
 export class ViewerResolver {
   @Query(() => Account)
-  public async viewer(): Promise<Account> {
+  public async viewer(@Ctx() ctx: IContext): Promise<Account> {
+    console.log('context is:', ctx.user);
     return accounts[0];
   }
 }

@@ -20,7 +20,6 @@ const accounts: Account[] = [
 export class ViewerResolver {
   @Query(() => Account)
   public async viewer(@Ctx() ctx: IContext): Promise<Account> {
-    console.log('context is:', ctx.user);
     return accounts[0];
   }
 }

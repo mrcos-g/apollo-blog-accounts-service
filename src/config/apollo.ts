@@ -5,7 +5,7 @@ const startServer = async (): Promise<void> => {
   const server = new ApolloServer({
     schema: await buildAccountsSchema(),
     context: ({ req }) => {
-      const user = (req.headers['user'] as string) || '';
+      const user = JSON.parse(req.headers['user'] as string) || '';
       return { user };
     },
     tracing: false,

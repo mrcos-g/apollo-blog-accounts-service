@@ -1,6 +1,7 @@
 import { Account } from '../../types/account';
 import { Resolver, Query, Ctx } from 'type-graphql';
 import auth0 from '../../../config/auth0';
+import { User } from 'auth0';
 
 export interface IContext {
   user: {
@@ -16,17 +17,22 @@ function createAccount(accountData: Account) {
 const accounts: Account[] = [
   createAccount({
     id: '1',
+    createdAt: '1629123392',
     email: 'marcos@test.com ',
   }),
 ];
 
 @Resolver()
 export class ViewerResolver {
-  @Query(() => Account)
-  public async viewer(@Ctx() ctx: IContext): Promise<Account> {
-    const viewer = await auth0.getUser({ id: ctx.user.sub });
-    console.log('viewer is:', viewer);
-    return accounts[0];
+  @Query(() => Account, { nullable: true })
+  public async viewer(@Ctx() ctx: IContext): Promise<User | null> {
+    if (ctx.user && ctx.user.sub) {
+      const viewer = await auth0.getUser({ id: ctx.user.sub });
+      console.log('viewer is:', viewer);
+      return viewer;
+    }
+
+    return null;
   }
 }
 

@@ -1,4 +1,14 @@
-import { ObjectType, Directive, Field, ID, Resolver, FieldResolver, Root, ResolverInterface } from 'type-graphql';
+import {
+  ObjectType,
+  Directive,
+  Field,
+  ID,
+  Resolver,
+  FieldResolver,
+  Root,
+  ResolverInterface,
+} from 'type-graphql';
+import { User } from 'auth0';
 
 @Directive(`@key(fields: "id")`)
 @ObjectType()
@@ -16,7 +26,18 @@ export class Account {
 @Resolver(() => Account)
 export class AccountResolver implements ResolverInterface<Account> {
   @FieldResolver()
-  id(@Root() account: Account): string {
-    return account.createdAt;
+  id(@Root() account: User): string {
+    console.log('account is:', account);
+    return account.user_id!;
+  }
+
+  @FieldResolver()
+  createdAt(@Root() account: User): string {
+    return account.created_at!;
+  }
+
+  @FieldResolver()
+  email(@Root() account: User): string | undefined {
+    return account.email;
   }
 }

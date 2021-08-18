@@ -28,7 +28,7 @@ export class ViewerResolver {
   public async viewer(@Ctx() ctx: IContext): Promise<User | null> {
     if (ctx.user && ctx.user.sub) {
       const viewer = await auth0.getUser({ id: ctx.user.sub });
-      console.log('viewer is:', viewer);
+
       return viewer;
     }
 
@@ -36,6 +36,9 @@ export class ViewerResolver {
   }
 }
 
-export async function resolveAccountReference(reference: Pick<Account, 'id'>): Promise<Account | undefined> {
-  return accounts.find((account) => account.id === reference.id);
+//may need to come back and modify as return may not be accurate with Account type
+export async function resolveAccountReference(
+  reference: Pick<Account, 'id'>,
+): Promise<User | undefined> {
+  return auth0.getUser({ id: reference.id });
 }

@@ -10,18 +10,6 @@ export interface IContext {
   };
 }
 
-function createAccount(accountData: Account) {
-  return Object.assign(new Account(), accountData);
-}
-
-const accounts: Account[] = [
-  createAccount({
-    id: '1',
-    createdAt: '1629123392',
-    email: 'marcos@test.com ',
-  }),
-];
-
 @Resolver()
 export class ViewerResolver {
   @Query(() => Account, { nullable: true })

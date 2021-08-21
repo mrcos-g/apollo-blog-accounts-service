@@ -27,7 +27,6 @@ export class Account {
 export class AccountResolver implements ResolverInterface<Account> {
   @FieldResolver()
   id(@Root() account: User): string {
-    console.log('account is:', account);
     return account.user_id as string;
   }
 

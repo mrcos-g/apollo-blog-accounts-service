@@ -28,12 +28,12 @@ export class AccountResolver implements ResolverInterface<Account> {
   @FieldResolver()
   id(@Root() account: User): string {
     console.log('account is:', account);
-    return account.user_id!;
+    return account.user_id as string;
   }
 
   @FieldResolver()
   createdAt(@Root() account: User): string {
-    return account.created_at!;
+    return account.created_at as string;
   }
 
   @FieldResolver()

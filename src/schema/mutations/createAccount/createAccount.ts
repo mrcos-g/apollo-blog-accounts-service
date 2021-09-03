@@ -3,9 +3,7 @@ import { Arg, Mutation, Resolver } from 'type-graphql';
 
 import auth0 from '../../../config/auth0';
 
-import { createAccountInput } from '../../types/account';
-
-import { Account } from '../../types/account';
+import { Account, createAccountInput } from '../../types/account';
 
 @Resolver()
 export class createAccountMutation {

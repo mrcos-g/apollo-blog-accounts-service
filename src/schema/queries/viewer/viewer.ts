@@ -11,7 +11,7 @@ export interface IContext {
 }
 
 @Resolver()
-export class ViewerResolver {
+export class ViewerQueryResolver {
   @Query(() => Account, { nullable: true })
   public async viewer(@Ctx() ctx: IContext): Promise<User | null> {
     if (ctx.user && ctx.user.sub) {

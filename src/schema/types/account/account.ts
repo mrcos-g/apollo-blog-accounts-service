@@ -3,6 +3,7 @@ import {
   Directive,
   Field,
   ID,
+  InputType,
   Resolver,
   FieldResolver,
   Root,
@@ -24,7 +25,7 @@ export class Account {
 }
 
 @Resolver(() => Account)
-export class AccountResolver implements ResolverInterface<Account> {
+export class AccountFieldResolvers implements ResolverInterface<Account> {
   @FieldResolver()
   id(@Root() account: User): string {
     return account.user_id as string;
@@ -39,4 +40,13 @@ export class AccountResolver implements ResolverInterface<Account> {
   email(@Root() account: User): string | undefined {
     return account.email;
   }
+}
+
+@InputType({ description: 'New user account data' })
+export class createAccountInput {
+  @Field()
+  public email!: string;
+
+  @Field()
+  public password!: string;
 }

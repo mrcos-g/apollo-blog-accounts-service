@@ -43,10 +43,25 @@ export class AccountFieldResolvers implements ResolverInterface<Account> {
 }
 
 @InputType({ description: 'New user account data' })
-export class createAccountInput {
+export class CreateAccountInput {
   @Field()
   public email!: string;
 
   @Field()
   public password!: string;
+}
+
+@InputType({ description: 'Update user account data' })
+export class UpdateAccountInput {
+  @Field(() => ID)
+  public id!: string;
+
+  @Field({ nullable: true })
+  public email?: string;
+
+  @Field({ nullable: true })
+  public password?: string;
+
+  @Field({ nullable: true })
+  public newPassword?: string;
 }

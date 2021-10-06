@@ -8,7 +8,6 @@ export class AccountQueryResolver {
   @Query(() => Account, { nullable: true })
   async account(@Arg('id') id: string): Promise<User> {
     const user = await auth0.getUser({ id });
-    console.log('user is:', user);
     return user;
   }
 }

@@ -22,6 +22,12 @@ export class Account {
 
   @Field({ description: 'user account email', nullable: true })
   public email?: string;
+
+  @Field({
+    description: 'Is the user assigned the role of Moderator',
+    nullable: true,
+  })
+  public isModerator?: boolean;
 }
 
 @Resolver(() => Account)
@@ -39,6 +45,15 @@ export class AccountFieldResolvers implements ResolverInterface<Account> {
   @FieldResolver()
   email(@Root() account: User): string | undefined {
     return account.email;
+  }
+
+  @FieldResolver()
+  isModerator(@Root() account: User): boolean {
+    return (
+      account.app_metadata &&
+      account.app_metadata.roles &&
+      account.app_metadata.roles.includes('moderator')
+    );
   }
 }
 

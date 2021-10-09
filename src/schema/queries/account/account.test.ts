@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import faker from 'faker';
 import { graphql } from 'graphql';
 
@@ -12,23 +13,21 @@ describe('Query - account', () => {
         email: faker.internet.email(),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (auth0.getUser as any).mockImplementation(() => ({
-        id: mockUser.id,
+        user_id: mockUser.id,
         email: mockUser.email,
       }));
 
       const query = `query {
         account(id: "${mockUser.id}"){
-          account{
             id
             email
-          }
         }
       }`;
 
       const result = await graphql(schema, query);
-      expect(result.data).toEqual({ account: { account: mockUser } });
+      console.log('result is:', result);
+      expect(result.data).toEqual({ account: mockUser });
     });
   });
 });

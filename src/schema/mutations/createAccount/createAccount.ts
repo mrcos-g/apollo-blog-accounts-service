@@ -1,7 +1,7 @@
 import { User } from 'auth0';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 
-import auth0 from '../../../config/auth0';
+import { auth0 } from '../../../config/auth0';
 
 import { Account, CreateAccountInput } from '../../types/account';
 

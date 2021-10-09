@@ -1,6 +1,6 @@
 import { Arg, Mutation, Resolver } from 'type-graphql';
 
-import auth0 from '../../../config/auth0';
+import { auth0 } from '../../../config/auth0';
 
 @Resolver()
 export class DeleteAccountMutation {

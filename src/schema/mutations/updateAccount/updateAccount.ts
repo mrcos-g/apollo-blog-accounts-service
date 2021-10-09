@@ -3,7 +3,7 @@ import { Arg, Resolver, Mutation } from 'type-graphql';
 
 import { Account, UpdateAccountInput } from '../../types/account';
 
-import auth0 from '../../../config/auth0';
+import { auth0 } from '../../../config/auth0';
 
 import { User } from 'auth0';
 

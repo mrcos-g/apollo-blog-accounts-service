@@ -11,22 +11,30 @@ describe('Query - account', () => {
       const mockUser = {
         id: faker.datatype.uuid(),
         email: faker.internet.email(),
+        createdAt: faker.date.recent().toISOString(),
+        isModerator: faker.datatype.boolean(),
       };
 
       (auth0.getUser as any).mockImplementation(() => ({
         user_id: mockUser.id,
         email: mockUser.email,
+        created_at: mockUser.createdAt,
+        app_metadata: {
+          roles: ['moderator'],
+        },
       }));
 
       const query = `query {
         account(id: "${mockUser.id}"){
             id
             email
+            createdAt
+            isModerator
         }
       }`;
 
       const result = await graphql(schema, query);
-      console.log('result is:', result);
+
       expect(result.data).toEqual({ account: mockUser });
     });
   });

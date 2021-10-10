@@ -12,7 +12,7 @@ describe('Query - account', () => {
         id: faker.datatype.uuid(),
         email: faker.internet.email(),
         createdAt: faker.date.recent().toISOString(),
-        isModerator: faker.datatype.boolean(),
+        isModerator: true,
       };
 
       (auth0.getUser as any).mockImplementation(() => ({

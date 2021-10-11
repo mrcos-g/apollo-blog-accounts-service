@@ -12,6 +12,7 @@ jest.mock('../src/config/auth0', () => ({
     deleteUser: jest.fn(),
     getUser: jest.fn(),
     getUsers: jest.fn(),
+    updateUser: jest.fn(),
   },
 }));
 

@@ -37,11 +37,12 @@ export class UpdateAccountMutation {
         { id },
         { password: newPassword },
       );
+      console.log('new user test');
 
       return updatedUser;
     }
 
-    const user = await auth0.updateUser({ id }, {});
+    const user = await auth0.updateUser({ id }, { email });
 
     return user;
   }

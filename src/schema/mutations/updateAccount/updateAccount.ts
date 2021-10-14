@@ -37,7 +37,6 @@ export class UpdateAccountMutation {
         { id },
         { password: newPassword },
       );
-      console.log('new user test');
 
       return updatedUser;
     }
